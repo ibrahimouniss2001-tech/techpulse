@@ -1,0 +1,85 @@
+{
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "categories": "Categories",
+    "about": "About Us",
+    "contact": "Contact",
+    "search": "Search"
+  },
+  "home": {
+    "hero_badge": "The best in tech",
+    "hero_title": "Discover the future of technology",
+    "hero_subtitle": "In-depth analysis, honest comparisons and the latest in gadgets, AI and tech.",
+    "hero_cta": "Explore articles",
+    "hero_cta_secondary": "View categories",
+    "featured": "Featured",
+    "latest": "Latest articles",
+    "trending": "Trending",
+    "newsletter_title": "Stay in the loop",
+    "newsletter_subtitle": "Get the best tech articles delivered straight to your inbox.",
+    "newsletter_placeholder": "you@email.com",
+    "newsletter_cta": "Subscribe",
+    "newsletter_disclaimer": "No spam. Unsubscribe anytime.",
+    "categories_title": "Browse by category",
+    "read_more": "Read more",
+    "min_read": "min read"
+  },
+  "blog": {
+    "title": "Technology Blog",
+    "subtitle": "Analysis, comparisons and news from the tech world",
+    "all_posts": "All articles",
+    "back_to_blog": "Back to blog",
+    "share": "Share",
+    "toc": "Table of contents",
+    "related": "Related articles",
+    "tags": "Tags",
+    "author": "Author",
+    "published": "Published",
+    "updated": "Updated",
+    "reading_time": "Reading time"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search articles, gadgets, reviews...",
+    "no_results": "No results found for",
+    "results_for": "Results for",
+    "results_count": "articles found"
+  },
+  "about": {
+    "title": "About TechPulse",
+    "subtitle": "Your reference in technology and gadgets"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a question or proposal?",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send message",
+    "success": "Message sent successfully!",
+    "error": "Error sending. Please try again."
+  },
+  "footer": {
+    "tagline": "Your reference in technology, gadgets and innovation.",
+    "legal": "Legal",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookies Policy",
+    "terms": "Terms & Conditions",
+    "sitemap": "Sitemap",
+    "rights": "All rights reserved.",
+    "disclosure": "Disclosure: TechPulse may receive commissions for purchases made through affiliate links."
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "home": "Home",
+    "dark_mode": "Dark mode",
+    "light_mode": "Light mode",
+    "lang_switch": "Español",
+    "categories": "Categories",
+    "posts": "articles",
+    "see_all": "See all"
+  }
+}
