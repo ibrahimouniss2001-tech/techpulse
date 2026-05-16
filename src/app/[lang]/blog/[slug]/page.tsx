@@ -260,9 +260,9 @@ function markdownToHtml(markdown: string): string {
       const cells = match.split('|').filter(c => c.trim());
       return '<tr>' + cells.map(c => `<td>${c.trim()}</td>`).join('') + '</tr>';
     })
-    .replace(/(<tr>.*<\/tr>\n?)+/gs, (match) => `<table><tbody>${match}</tbody></table>`)
+    .replace(/(<tr>[\s\S]*?<\/tr>\n?)+/g, (match) => `<table><tbody>${match}</tbody></table>`)
     .replace(/^- (.+)$/gm, '<li>$1</li>')
-    .replace(/(<li>.*<\/li>\n?)+/gs, (match) => `<ul>${match}</ul>`)
+    .replace(/(<li>[\s\S]*?<\/li>\n?)+/g, (match) => `<ul>${match}</ul>`)
     .replace(/\n\n/g, '</p><p>')
     .replace(/^(?!<[huptl])/gm, '<p>')
     .replace(/<p><\/p>/g, '')
