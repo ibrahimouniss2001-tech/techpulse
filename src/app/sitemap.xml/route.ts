@@ -73,7 +73,7 @@ function generateSitemapXml(): string {
     <priority>0.8</priority>
     <image:image>
       <image:loc>${post.image}</image:loc>
-      <image:title>${post.title[lang]}</image:title>
+      <image:title>${post.title[lang as 'es' | 'en']}</image:title>
     </image:image>
     ${alternates}
   </url>`);
