@@ -1,5 +1,5 @@
-export const dynamic = 'force-dynamic';
 'use client';
+export const dynamic = 'force-dynamic';
 import { useState } from 'react';
 import { Send, Loader2, Check, Mail, MessageSquare } from 'lucide-react';
 
