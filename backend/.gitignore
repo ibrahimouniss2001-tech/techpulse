@@ -1,0 +1,17 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+*.db
+*.db-shm
+*.db-wal
+.venv/
+venv/
+
+# Carpetas del watcher — ignora contenido pero no las carpetas
+inbox/*
+!inbox/.gitkeep
+procesados/*
+!procesados/.gitkeep
+errores/*
+!errores/.gitkeep

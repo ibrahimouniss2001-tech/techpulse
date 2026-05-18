@@ -1,6 +1,7 @@
 export const dynamic = 'force-dynamic';
 import { Metadata } from 'next';
 import { POSTS, CATEGORIES } from '@/data/posts';
+import { fetchApiPosts } from '@/lib/api';
 import { PostCard } from '@/components/blog/PostCard';
 import { AdSlot } from '@/components/ads/AdSlot';
 import { BreadcrumbSchema } from '@/components/seo/Schemas';
@@ -17,8 +18,17 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-export default function BlogPage({ params }: { params: { lang: string } }) {
+export default async function BlogPage({ params }: { params: { lang: string } }) {
   const lang = params.lang as 'es' | 'en';
+
+  const apiPosts = await fetchApiPosts();
+  // API posts first (newest), then static posts. Deduplicate by slug.
+  const seen = new Set<string>();
+  const posts = [...apiPosts, ...POSTS].filter((p) => {
+    if (seen.has(p.slug)) return false;
+    seen.add(p.slug);
+    return true;
+  });
 
   return (
     <>
@@ -69,11 +79,11 @@ export default function BlogPage({ params }: { params: { lang: string } }) {
           {/* Main grid */}
           <div className="lg:col-span-2">
             <div className="grid sm:grid-cols-2 gap-6">
-              {POSTS.map((post, i) => (
+              {posts.map((post, i) => (
                 <div key={post.slug}>
                   <PostCard post={post} lang={lang} variant="card" index={i} />
                   {/* in-content ad every 4 posts */}
-                  {(i + 1) % 4 === 0 && i < POSTS.length - 1 && (
+                  {(i + 1) % 4 === 0 && i < posts.length - 1 && (
                     <div className="col-span-full mt-6">
                       <AdSlot slot="7890123456" format="rectangle" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
                     </div>
@@ -99,7 +109,7 @@ export default function BlogPage({ params }: { params: { lang: string } }) {
                     >
                       <span>{cat.icon} {cat.name[lang]}</span>
                       <span className="text-xs bg-slate-100 dark:bg-slate-700 px-2 py-1 rounded-full">
-                        {POSTS.filter(p => p.category === cat.slug).length}
+                        {posts.filter(p => p.category === cat.slug).length}
                       </span>
                     </Link>
                   </li>

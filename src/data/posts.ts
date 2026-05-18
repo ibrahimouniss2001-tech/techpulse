@@ -15,6 +15,7 @@ export interface Post {
   seoTitle?: { es: string; en: string };
   seoDescription?: { es: string; en: string };
   faqs?: FAQ[];
+  contentIsHtml?: boolean;
 }
 
 export interface Author {

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, Clock, ArrowLeft, Tag } from 'lucide-react';
 import { POSTS, getRelatedPosts } from '@/data/posts';
+import { fetchApiPost } from '@/lib/api';
 import { AdSlot } from '@/components/ads/AdSlot';
 import { PostCard } from '@/components/blog/PostCard';
 import { TableOfContents } from '@/components/blog/TableOfContents';
@@ -22,10 +23,10 @@ export async function generateMetadata({
 }: {
   params: { lang: string; slug: string };
 }): Promise<Metadata> {
-  const post = POSTS.find((p) => p.slug === params.slug);
+  const lang = params.lang as 'es' | 'en';
+  const post = (await fetchApiPost(params.slug)) ?? POSTS.find((p) => p.slug === params.slug);
   if (!post) return {};
 
-  const lang = params.lang as 'es' | 'en';
   const title = post.seoTitle?.[lang] || post.title[lang];
   const description = post.seoDescription?.[lang] || post.excerpt[lang];
 
@@ -54,14 +55,20 @@ export async function generateMetadata({
   };
 }
 
-export default function PostPage({ params }: { params: { lang: string; slug: string } }) {
+export default async function PostPage({ params }: { params: { lang: string; slug: string } }) {
   const lang = params.lang as 'es' | 'en';
-  const post = POSTS.find((p) => p.slug === params.slug);
 
+  // API-generated posts take priority; fall back to static hardcoded posts
+  const post = (await fetchApiPost(params.slug)) ?? POSTS.find((p) => p.slug === params.slug);
   if (!post) notFound();
 
   const related = getRelatedPosts(post.slug, post.category, 3);
-  const headings = extractHeadings(post.content[lang]);
+  const renderedContent = post.contentIsHtml
+    ? post.content[lang]
+    : markdownToHtml(post.content[lang]);
+  const headings = post.contentIsHtml
+    ? extractHeadingsFromHtml(post.content[lang])
+    : extractHeadings(post.content[lang]);
 
   return (
     <>
@@ -152,13 +159,13 @@ export default function PostPage({ params }: { params: { lang: string; slug: str
               {post.excerpt[lang]}
             </div>
 
-            {/* Content rendered as prose */}
+            {/* Content */}
             <div
               className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-a:text-brand-600 dark:prose-a:text-brand-400 prose-img:rounded-xl prose-img:shadow-card"
-              dangerouslySetInnerHTML={{ __html: markdownToHtml(post.content[lang]) }}
+              dangerouslySetInnerHTML={{ __html: renderedContent }}
             />
 
-            {/* In-content ad — after content first section */}
+            {/* In-content ad */}
             <div className="my-10">
               <AdSlot slot="2233445566" format="rectangle" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
             </div>
@@ -205,7 +212,6 @@ export default function PostPage({ params }: { params: { lang: string; slug: str
 
           {/* Sticky Sidebar */}
           <aside className="space-y-8">
-            {/* Table of Contents */}
             {headings.length > 0 && (
               <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 sticky top-24">
                 <h3 className="font-display font-bold text-slate-900 dark:text-white mb-4 text-sm uppercase tracking-wider">
@@ -215,7 +221,6 @@ export default function PostPage({ params }: { params: { lang: string; slug: str
               </div>
             )}
 
-            {/* Sidebar ad */}
             <div className="sticky top-80">
               <AdSlot slot="3344556677" format="sidebar" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
             </div>
@@ -247,7 +252,8 @@ export default function PostPage({ params }: { params: { lang: string; slug: str
   );
 }
 
-// Simple markdown to HTML converter (use remark in production)
+// ── Helpers ──────────────────────────────────────────────────────────────────
+
 function markdownToHtml(markdown: string): string {
   return markdown
     .replace(/^### (.+)$/gm, '<h3 id="$1">$1</h3>')
@@ -268,4 +274,14 @@ function markdownToHtml(markdown: string): string {
     .replace(/^(?!<[huptl])/gm, '<p>')
     .replace(/<p><\/p>/g, '')
     .replace(/<p>(<[huptl])/g, '$1');
+}
+
+/** Extract h2/h3 headings from HTML for the table of contents */
+function extractHeadingsFromHtml(html: string) {
+  const matches = [...html.matchAll(/<h([23])[^>]*>(.*?)<\/h[23]>/gi)];
+  return matches.map((m) => ({
+    level: parseInt(m[1]) as 2 | 3,
+    text: m[2].replace(/<[^>]+>/g, ''),
+    id: m[2].replace(/<[^>]+>/g, '').toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, ''),
+  }));
 }

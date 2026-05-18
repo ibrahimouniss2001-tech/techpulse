@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Zap, TrendingUp, Star } from 'lucide-react';
 import { POSTS, CATEGORIES, getFeaturedPosts } from '@/data/posts';
+import { fetchApiPosts } from '@/lib/api';
 import { PostCard } from '@/components/blog/PostCard';
 import { CategoryCard } from '@/components/blog/CategoryCard';
 import { Newsletter } from '@/components/ui/Newsletter';
@@ -26,11 +27,22 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-export default function HomePage({ params }: { params: { lang: string } }) {
+export default async function HomePage({ params }: { params: { lang: string } }) {
   const lang = params.lang as 'es' | 'en';
-  const featured = getFeaturedPosts();
-  const latest = POSTS.slice(0, 6);
-  const trending = POSTS.slice(0, 4);
+
+  const apiPosts = await fetchApiPosts();
+  const seen = new Set<string>();
+  const allPosts = [...apiPosts, ...POSTS].filter((p) => {
+    if (seen.has(p.slug)) return false;
+    seen.add(p.slug);
+    return true;
+  });
+
+  const featured = allPosts.filter((p) => p.featured).length > 0
+    ? allPosts.filter((p) => p.featured)
+    : getFeaturedPosts();
+  const latest = allPosts.slice(0, 6);
+  const trending = allPosts.slice(0, 4);
 
   return (
     <>
