@@ -1,11 +1,13 @@
 import os
 import logging
 import time
+import tempfile
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import httpx
 from dotenv import load_dotenv
-from fastapi import Depends, FastAPI, Header, HTTPException, status
+from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -13,6 +15,7 @@ from pydantic import BaseModel
 load_dotenv()
 
 from database import get_db, init_db
+from lector_archivos import leer_archivo
 from models import Articulo, GuionTikTok
 from schemas import (
     ArticuloDetailOut,
@@ -224,6 +227,67 @@ async def procesar_texto(payload: ProcesarTextoRequest, db: Session = Depends(ge
 
     vercel_triggered = await _disparar_vercel() if slugs else False
 
+    return ProcesarTextoResponse(
+        articulos_generados=len(slugs),
+        slugs=slugs,
+        vercel_triggered=vercel_triggered,
+    )
+
+
+# ── Subida directa de archivo ─────────────────────────────────────────────────
+
+EXTENSIONES_PERMITIDAS = {".pdf", ".docx", ".txt", ".md"}
+
+
+@app.post(
+    "/api/subir-archivo",
+    response_model=ProcesarTextoResponse,
+    status_code=status.HTTP_201_CREATED,
+    tags=["Control"],
+    dependencies=[Depends(verificar_api_key)],
+)
+async def subir_archivo(archivo: UploadFile = File(...), db: Session = Depends(get_db)):
+    """Recibe un PDF/DOCX/TXT, extrae temas con IA y genera un artículo por cada uno."""
+    ext = Path(archivo.filename or "").suffix.lower()
+    if ext not in EXTENSIONES_PERMITIDAS:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            f"Extensión no soportada: {ext}. Usa PDF, DOCX o TXT.")
+
+    contenido = await archivo.read()
+    with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as tmp:
+        tmp.write(contenido)
+        tmp_path = tmp.name
+
+    try:
+        texto = leer_archivo(tmp_path)
+    except Exception as exc:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, f"Error leyendo archivo: {exc}")
+    finally:
+        os.unlink(tmp_path)
+
+    temas = ia_service.extraer_temas_de_texto(texto)
+    if not temas:
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY,
+                            "No se encontraron temas de artículos en el archivo.")
+
+    logger.info("Procesando %d tema(s) desde archivo subido...", len(temas))
+    slugs = []
+    for i, tema_data in enumerate(temas, 1):
+        logger.info("[%d/%d] Generando: %s", i, len(temas), tema_data["tema"][:60])
+        try:
+            resultado = ia_service.generar_contenido(
+                tema=tema_data["tema"],
+                categoria=tema_data["categoria"],
+            )
+            articulo = _guardar_articulo(db, resultado, tema_data["categoria"])
+            slugs.append(articulo.slug)
+            logger.info("  ✅ %s", articulo.slug)
+        except Exception as exc:
+            logger.error("  ❌ Error en tema %d: %s", i, exc)
+        if i < len(temas):
+            time.sleep(5)
+
+    vercel_triggered = await _disparar_vercel() if slugs else False
     return ProcesarTextoResponse(
         articulos_generados=len(slugs),
         slugs=slugs,
