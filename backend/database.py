@@ -9,9 +9,14 @@ _DATABASE_URL = os.getenv("DATABASE_URL", "sqlite:///./techpulse.db")
 if _DATABASE_URL.startswith("postgres://"):
     _DATABASE_URL = _DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
-_connect_args = {"check_same_thread": False} if _DATABASE_URL.startswith("sqlite") else {}
+_connect_args = {"check_same_thread": False} if _DATABASE_URL.startswith("sqlite") else {"connect_timeout": 10}
 
-engine = create_engine(_DATABASE_URL, connect_args=_connect_args)
+engine = create_engine(
+    _DATABASE_URL,
+    connect_args=_connect_args,
+    pool_pre_ping=True,
+    pool_timeout=15,
+)
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 

@@ -36,8 +36,11 @@ VERCEL_DEPLOY_HOOK = os.getenv("VERCEL_DEPLOY_HOOK", "")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
-    logger.info("Base de datos inicializada.")
+    try:
+        init_db()
+        logger.info("Base de datos inicializada.")
+    except Exception as exc:
+        logger.error("Error inicializando BD (el app arranca igualmente): %s", exc)
     yield
 
 
