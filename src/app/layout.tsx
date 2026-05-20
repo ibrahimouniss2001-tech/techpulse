@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+﻿import type { Metadata } from 'next';
 import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google';
 import '@/styles/globals.css';
 
@@ -25,16 +25,16 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.techpulse.dev'),
+  metadataBase: new URL('https://www.TecnoActual.dev'),
   title: {
-    default: 'TechPulse — Tecnología, Gadgets e Innovación',
-    template: '%s | TechPulse',
+    default: 'TecnoActual — Tecnología, Gadgets e Innovación',
+    template: '%s | TecnoActual',
   },
   description: 'Análisis profundos, comparativas honestas y las últimas novedades en gadgets, smartphones, IA y tecnología. Tu referencia tech en español e inglés.',
   keywords: ['tecnología', 'gadgets', 'smartphones', 'laptops', 'inteligencia artificial', 'gaming', 'tech news'],
-  authors: [{ name: 'TechPulse Editorial', url: 'https://www.techpulse.dev/about' }],
-  creator: 'TechPulse',
-  publisher: 'TechPulse Media',
+  authors: [{ name: 'TecnoActual Editorial', url: 'https://www.TecnoActual.dev/about' }],
+  creator: 'TecnoActual',
+  publisher: 'TecnoActual Media',
   robots: {
     index: true,
     follow: true,
@@ -44,21 +44,21 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'es_ES',
     alternateLocale: 'en_US',
-    url: 'https://www.techpulse.dev',
-    siteName: 'TechPulse',
-    images: [{ url: '/og-default.jpg', width: 1200, height: 630, alt: 'TechPulse — Tecnología y Gadgets' }],
+    url: 'https://www.TecnoActual.dev',
+    siteName: 'TecnoActual',
+    images: [{ url: '/og-default.jpg', width: 1200, height: 630, alt: 'TecnoActual — Tecnología y Gadgets' }],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@techpulse_dev',
-    creator: '@techpulse_dev',
+    site: '@TecnoActual_dev',
+    creator: '@TecnoActual_dev',
   },
   verification: {
     google: 'GOOGLE_VERIFICATION_TOKEN',
   },
   alternates: {
-    canonical: 'https://www.techpulse.dev',
-    languages: { 'es': 'https://www.techpulse.dev/es', 'en': 'https://www.techpulse.dev/en' },
+    canonical: 'https://www.TecnoActual.dev',
+    languages: { 'es': 'https://www.TecnoActual.dev/es', 'en': 'https://www.TecnoActual.dev/en' },
   },
 };
 

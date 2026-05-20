@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Zap, Twitter, Github, Rss } from 'lucide-react';
+﻿import Link from 'next/link';
+import { Cpu, Twitter, Github, Rss } from 'lucide-react';
 import { CATEGORIES } from '@/data/posts';
 
 interface FooterProps {
@@ -18,8 +18,8 @@ export function Footer({ lang }: FooterProps) {
   ];
 
   const socials = [
-    { href: 'https://twitter.com/techpulse_dev', Icon: Twitter, label: 'Twitter' },
-    { href: 'https://github.com/techpulse', Icon: Github, label: 'GitHub' },
+    { href: 'https://twitter.com/TecnoActual_dev', Icon: Twitter, label: 'Twitter' },
+    { href: 'https://github.com/TecnoActual', Icon: Github, label: 'GitHub' },
     { href: `/${lang}/rss.xml`, Icon: Rss, label: 'RSS' },
   ];
 
@@ -29,12 +29,12 @@ export function Footer({ lang }: FooterProps) {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href={`/${lang}`} className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center">
-                <Zap size={16} className="text-white" />
+            <Link href={`/${lang}`} className="flex items-center gap-2.5 mb-4">
+              <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <Cpu size={18} className="text-white" />
               </div>
               <span className="font-display text-xl font-bold">
-                Tech<span className="text-brand-400">Pulse</span>
+                Tecno<span className="text-violet-400">Actual</span>
               </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
@@ -124,11 +124,11 @@ export function Footer({ lang }: FooterProps) {
         <div className="border-t border-slate-800 pt-8 space-y-4">
           <p className="text-xs text-slate-500 leading-relaxed">
             {isEs
-              ? '⚠️ Divulgación: TechPulse puede recibir comisiones por compras realizadas a través de enlaces de afiliados en este sitio. Esto no influye en nuestra editorial. Vea nuestra política completa de afiliados en la Política de Privacidad.'
-              : '⚠️ Disclosure: TechPulse may receive commissions for purchases made through affiliate links on this site. This does not influence our editorial. See our full affiliate policy in the Privacy Policy.'}
+              ? '⚠️ Divulgación: TecnoActual puede recibir comisiones por compras realizadas a través de enlaces de afiliados en este sitio. Esto no influye en nuestra editorial. Vea nuestra política completa de afiliados en la Política de Privacidad.'
+              : '⚠️ Disclosure: TecnoActual may receive commissions for purchases made through affiliate links on this site. This does not influence our editorial. See our full affiliate policy in the Privacy Policy.'}
           </p>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-slate-500">
-            <p>© {new Date().getFullYear()} TechPulse Media. {isEs ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
+            <p>© {new Date().getFullYear()} TecnoActual Media. {isEs ? 'Todos los derechos reservados.' : 'All rights reserved.'}</p>
             <p>{isEs ? 'Hecho con ❤️ para la comunidad tech' : 'Made with ❤️ for the tech community'}</p>
           </div>
         </div>

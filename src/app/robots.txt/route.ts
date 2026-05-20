@@ -1,4 +1,4 @@
-export async function GET() {
+﻿export async function GET() {
   const content = `User-agent: *
 Allow: /
 
@@ -7,7 +7,7 @@ Disallow: /api/
 Disallow: /_next/
 
 # Sitemaps
-Sitemap: https://www.techpulse.dev/sitemap.xml
+Sitemap: https://www.TecnoActual.dev/sitemap.xml
 
 # Crawl delay
 Crawl-delay: 1

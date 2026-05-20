@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Moon, Sun, Search, Menu, X, Zap } from 'lucide-react';
+import { Moon, Sun, Search, Menu, X, Cpu } from 'lucide-react';
 import { CATEGORIES } from '@/data/posts';
 
 interface HeaderProps {
@@ -35,9 +35,10 @@ export function Header({ lang }: HeaderProps) {
 
   const navItems = [
     { href: `/${lang}`, label: lang === 'es' ? 'Inicio' : 'Home' },
-    { href: `/${lang}/blog`, label: 'Blog' },
+    { href: `/${lang}/blog`, label: lang === 'es' ? 'Artículos' : 'Articles' },
     { href: `/${lang}/categoria`, label: lang === 'es' ? 'Categorías' : 'Categories' },
     { href: `/${lang}/about`, label: lang === 'es' ? 'Nosotros' : 'About' },
+    { href: `/${lang}/contact`, label: lang === 'es' ? 'Contacto' : 'Contact' },
   ];
 
   const switchLangPath = pathname.replace(`/${lang}`, `/${otherLang}`);
@@ -53,12 +54,12 @@ export function Header({ lang }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
-          <Link href={`/${lang}`} className="flex items-center gap-2 group">
-            <div className="w-8 h-8 bg-gradient-to-br from-brand-500 to-brand-700 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-glow-brand transition-shadow">
-              <Zap size={16} className="text-white" />
+          <Link href={`/${lang}`} className="flex items-center gap-2.5 group">
+            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+              <Cpu size={18} className="text-white" />
             </div>
-            <span className="font-display text-xl font-bold text-slate-900 dark:text-white">
-              Tech<span className="text-brand-600 dark:text-brand-400">Pulse</span>
+            <span className="font-display text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+              Tecno<span className="text-violet-600 dark:text-violet-400">Actual</span>
             </span>
           </Link>
 

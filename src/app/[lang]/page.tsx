@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Zap, TrendingUp, Star } from 'lucide-react';
+import { ArrowRight, TrendingUp, Star, Sparkles, Cpu } from 'lucide-react';
 import { POSTS, CATEGORIES, getFeaturedPosts } from '@/data/posts';
 import { fetchApiPosts } from '@/lib/api';
 import { PostCard } from '@/components/blog/PostCard';
@@ -15,14 +15,14 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const isEs = params.lang === 'es';
   return {
     title: isEs
-      ? 'TechPulse — Tecnología, Gadgets e Innovación Digital'
-      : 'TechPulse — Technology, Gadgets & Digital Innovation',
+      ? 'TecnoActual — IA, Gadgets y Tecnología al Día'
+      : 'TecnoActual — AI, Gadgets & Tech Up to Date',
     description: isEs
-      ? 'Análisis profundos, comparativas honestas y las últimas novedades en gadgets, smartphones, IA y tecnología. Tu referencia tech en español.'
-      : 'In-depth analysis, honest comparisons and the latest in gadgets, smartphones, AI and technology. Your tech reference in English.',
+      ? 'Las últimas noticias y análisis en inteligencia artificial, smartphones, gadgets y software. Tu referencia de tecnología actual en español.'
+      : 'Latest news and analysis on AI, smartphones, gadgets and software. Your up-to-date tech reference.',
     alternates: {
-      canonical: `https://www.techpulse.dev/${params.lang}`,
-      languages: { es: 'https://www.techpulse.dev/es', en: 'https://www.techpulse.dev/en' },
+      canonical: `https://tecnoactual.vercel.app/${params.lang}`,
+      languages: { es: 'https://tecnoactual.vercel.app/es', en: 'https://tecnoactual.vercel.app/en' },
     },
   };
 }
@@ -60,29 +60,29 @@ export default async function HomePage({ params }: { params: { lang: string } })
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left: Text */}
             <div className="animate-slide-up">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 dark:bg-brand-900/30 text-brand-700 dark:text-brand-400 text-sm font-medium mb-6 border border-brand-200 dark:border-brand-800">
-                <Zap size={14} className="animate-pulse-slow" />
-                {lang === 'es' ? '🔥 Lo mejor en tecnología' : '🔥 The best in tech'}
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100 dark:bg-violet-900/30 text-violet-700 dark:text-violet-400 text-sm font-medium mb-6 border border-violet-200 dark:border-violet-800">
+                <Sparkles size={14} />
+                {lang === 'es' ? '⚡ Tecnología actual, explicada claro' : '⚡ Current tech, explained clearly'}
               </div>
               <h1 className="font-display text-display-lg lg:text-display-xl text-slate-900 dark:text-white mb-6 text-balance">
                 {lang === 'es' ? (
                   <>
-                    Descubre el{' '}
-                    <span className="gradient-text">futuro</span>{' '}
-                    de la tecnología
+                    La tecnología{' '}
+                    <span className="bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent">actual</span>,{' '}
+                    sin complicaciones
                   </>
                 ) : (
                   <>
-                    Discover the{' '}
-                    <span className="gradient-text">future</span>{' '}
-                    of technology
+                    Current{' '}
+                    <span className="bg-gradient-to-r from-violet-600 to-indigo-500 bg-clip-text text-transparent">technology</span>,{' '}
+                    no fluff
                   </>
                 )}
               </h1>
               <p className="text-lg lg:text-xl text-slate-600 dark:text-slate-400 mb-8 max-w-xl leading-relaxed">
                 {lang === 'es'
-                  ? 'Análisis profundos, comparativas honestas y las últimas novedades en gadgets, IA y tech. Todo lo que necesitas saber, sin bullshit.'
-                  : 'In-depth analysis, honest comparisons and the latest in gadgets, AI and tech. Everything you need to know, without the fluff.'}
+                  ? 'Análisis de IA, reseñas de gadgets, comparativas de móviles y novedades tech. Todo lo que pasa en tecnología, explicado en español.'
+                  : 'AI analysis, gadget reviews, phone comparisons and tech news. Everything happening in tech, explained clearly.'}
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link

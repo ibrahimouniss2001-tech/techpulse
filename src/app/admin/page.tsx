@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useRef, useEffect } from 'react'
 
@@ -79,7 +79,7 @@ export default function AdminPage() {
 
   return (
     <main style={{ maxWidth: 620, margin: '48px auto', padding: '0 24px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>TechPulse Admin</h1>
+      <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>TecnoActual Admin</h1>
       <p style={{ fontSize: 14, color: '#666', marginBottom: 32 }}>Genera artículos SEO automáticamente con IA.</p>
 
       {/* API Key */}

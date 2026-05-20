@@ -23,7 +23,7 @@ export async function generateMetadata({
   if (!cat) return {};
 
   return {
-    title: `${cat.name[lang]} — TechPulse`,
+    title: `${cat.name[lang]} — TecnoActual`,
     description: cat.description[lang],
     alternates: { canonical: `https://www.techpulse.dev/${params.lang}/categoria/${params.categoria}` },
   };

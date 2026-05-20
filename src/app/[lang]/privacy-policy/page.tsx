@@ -3,8 +3,8 @@ import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   return {
-    title: params.lang === 'es' ? 'Política de Privacidad — TechPulse' : 'Privacy Policy — TechPulse',
-    description: params.lang === 'es' ? 'Política de privacidad de TechPulse. Cómo recogemos y usamos tus datos.' : 'TechPulse Privacy Policy. How we collect and use your data.',
+    title: params.lang === 'es' ? 'Política de Privacidad — TecnoActual' : 'Privacy Policy — TecnoActual',
+    description: params.lang === 'es' ? 'Política de privacidad de TecnoActual. Cómo recogemos y usamos tus datos.' : 'TecnoActual Privacy Policy. How we collect and use your data.',
     robots: { index: false, follow: false },
   };
 }
@@ -24,8 +24,8 @@ export default function PrivacyPage({ params }: { params: { lang: string } }) {
         <h2>{isEs ? '1. Responsable del tratamiento' : '1. Data Controller'}</h2>
         <p>
           {isEs
-            ? 'TechPulse Media (en adelante "TechPulse", "nosotros" o "nuestro") es el responsable del tratamiento de los datos personales recogidos a través de este sitio web (www.techpulse.dev).'
-            : 'TechPulse Media (hereinafter "TechPulse", "we" or "our") is the data controller for personal data collected through this website (www.techpulse.dev).'}
+            ? 'TecnoActual Media (en adelante "TecnoActual", "nosotros" o "nuestro") es el responsable del tratamiento de los datos personales recogidos a través de este sitio web (www.techpulse.dev).'
+            : 'TecnoActual Media (hereinafter "TecnoActual", "we" or "our") is the data controller for personal data collected through this website (www.techpulse.dev).'}
         </p>
 
         <h2>{isEs ? '2. Datos que recogemos' : '2. Data We Collect'}</h2>

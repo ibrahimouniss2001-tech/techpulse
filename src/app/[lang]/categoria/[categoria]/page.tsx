@@ -22,7 +22,7 @@ export async function generateMetadata({
   const cat = getCategoryBySlug(params.categoria);
   if (!cat) return {};
   return {
-    title: `${cat.name[lang]}: Análisis, Reviews y Comparativas — TechPulse`,
+    title: `${cat.name[lang]}: Análisis, Reviews y Comparativas — TecnoActual`,
     description: cat.description[lang],
     alternates: { canonical: `https://www.techpulse.dev/${params.lang}/categoria/${params.categoria}` },
   };

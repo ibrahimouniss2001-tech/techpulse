@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   return {
-    title: params.lang === 'es' ? 'Política de Cookies — TechPulse' : 'Cookies Policy — TechPulse',
+    title: params.lang === 'es' ? 'Política de Cookies — TecnoActual' : 'Cookies Policy — TecnoActual',
     robots: { index: false, follow: false },
   };
 }

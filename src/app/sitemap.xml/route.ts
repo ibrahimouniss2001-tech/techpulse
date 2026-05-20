@@ -1,6 +1,6 @@
-import { POSTS, CATEGORIES } from '@/data/posts';
+﻿import { POSTS, CATEGORIES } from '@/data/posts';
 
-const BASE_URL = 'https://www.techpulse.dev';
+const BASE_URL = 'https://www.TecnoActual.dev';
 const LANGS = ['es', 'en'];
 
 function generateSitemapXml(): string {

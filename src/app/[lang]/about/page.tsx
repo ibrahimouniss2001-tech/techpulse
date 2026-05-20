@@ -7,10 +7,10 @@ import { Shield, Zap, Award, Users } from 'lucide-react';
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const isEs = params.lang === 'es';
   return {
-    title: isEs ? 'Sobre TechPulse — Nuestro Equipo y Metodología' : 'About TechPulse — Our Team and Methodology',
+    title: isEs ? 'Sobre TecnoActual — Nuestro Equipo y Metodología' : 'About TecnoActual — Our Team and Methodology',
     description: isEs
-      ? 'Conoce al equipo detrás de TechPulse, nuestra metodología de análisis y nuestro compromiso con el periodismo tech honesto.'
-      : 'Meet the team behind TechPulse, our review methodology and our commitment to honest tech journalism.',
+      ? 'Conoce al equipo detrás de TecnoActual, nuestra metodología de análisis y nuestro compromiso con el periodismo tech honesto.'
+      : 'Meet the team behind TecnoActual, our review methodology and our commitment to honest tech journalism.',
   };
 }
 
@@ -54,7 +54,7 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
       {/* Hero */}
       <div className="text-center mb-16">
         <h1 className="font-display text-display-md font-bold text-slate-900 dark:text-white mb-6">
-          {lang === 'es' ? 'Sobre TechPulse' : 'About TechPulse'}
+          {lang === 'es' ? 'Sobre TecnoActual' : 'About TecnoActual'}
         </h1>
         <p className="text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed">
           {lang === 'es'
@@ -108,8 +108,8 @@ export default function AboutPage({ params }: { params: { lang: string } }) {
         </h3>
         <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
           {lang === 'es'
-            ? 'TechPulse puede recibir compensación cuando haces clic en enlaces de afiliados y realizas una compra. Esto no influye en nuestros análisis ni en las notas que otorgamos a los productos. Siempre probamos los productos de forma independiente y publicamos nuestra opinión honesta. Los productos analizados a veces son cedidos temporalmente por los fabricantes para su análisis y devueltos posteriormente.'
-            : 'TechPulse may receive compensation when you click on affiliate links and make a purchase. This does not influence our reviews or the ratings we give products. We always test products independently and publish our honest opinion. Products reviewed are sometimes temporarily loaned by manufacturers for review and returned afterwards.'}
+            ? 'TecnoActual puede recibir compensación cuando haces clic en enlaces de afiliados y realizas una compra. Esto no influye en nuestros análisis ni en las notas que otorgamos a los productos. Siempre probamos los productos de forma independiente y publicamos nuestra opinión honesta. Los productos analizados a veces son cedidos temporalmente por los fabricantes para su análisis y devueltos posteriormente.'
+            : 'TecnoActual may receive compensation when you click on affiliate links and make a purchase. This does not influence our reviews or the ratings we give products. We always test products independently and publish our honest opinion. Products reviewed are sometimes temporarily loaned by manufacturers for review and returned afterwards.'}
         </p>
       </div>
     </div>

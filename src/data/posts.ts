@@ -1,4 +1,4 @@
-export interface Post {
+﻿export interface Post {
   slug: string;
   title: { es: string; en: string };
   excerpt: { es: string; en: string };
@@ -44,8 +44,8 @@ export const AUTHORS: Record<string, Author> = {
     name: 'Carlos Mendoza',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=face',
     bio: {
-      es: 'Editor jefe de TechPulse. Apasionado de la tecnología con más de 10 años de experiencia analizando gadgets y tendencias tech.',
-      en: 'Editor-in-chief of TechPulse. Tech enthusiast with over 10 years of experience analyzing gadgets and tech trends.',
+      es: 'Editor jefe de TecnoActual. Apasionado de la tecnología con más de 10 años de experiencia analizando gadgets y tendencias tech.',
+      en: 'Editor-in-chief of TecnoActual. Tech enthusiast with over 10 years of experience analyzing gadgets and tech trends.',
     },
     twitter: '@carlosmendoza',
   },

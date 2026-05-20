@@ -1,4 +1,4 @@
-import { Post, FAQ } from '@/data/posts';
+﻿import { Post, FAQ } from '@/data/posts';
 
 // Article Schema (JSON-LD)
 export function ArticleSchema({ post, lang }: { post: Post; lang: 'es' | 'en' }) {
@@ -13,16 +13,16 @@ export function ArticleSchema({ post, lang }: { post: Post; lang: 'es' | 'en' })
     author: {
       '@type': 'Person',
       name: post.author.name,
-      url: `https://www.techpulse.dev/${lang}/about`,
+      url: `https://www.TecnoActual.dev/${lang}/about`,
     },
     publisher: {
       '@type': 'Organization',
-      name: 'TechPulse',
-      logo: { '@type': 'ImageObject', url: 'https://www.techpulse.dev/logo.png' },
+      name: 'TecnoActual',
+      logo: { '@type': 'ImageObject', url: 'https://www.TecnoActual.dev/logo.png' },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': `https://www.techpulse.dev/${lang}/blog/${post.slug}`,
+      '@id': `https://www.TecnoActual.dev/${lang}/blog/${post.slug}`,
     },
     inLanguage: lang === 'es' ? 'es-ES' : 'en-US',
     wordCount: post.content[lang].split(' ').length,
@@ -76,7 +76,7 @@ export function BreadcrumbSchema({ items }: { items: BreadcrumbItem[] }) {
       '@type': 'ListItem',
       position: i + 1,
       name: item.name,
-      item: `https://www.techpulse.dev${item.url}`,
+      item: `https://www.TecnoActual.dev${item.url}`,
     })),
   };
 
@@ -93,21 +93,21 @@ export function WebSiteSchema() {
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'TechPulse',
-    url: 'https://www.techpulse.dev',
+    name: 'TecnoActual',
+    url: 'https://www.TecnoActual.dev',
     description: 'Tecnología, gadgets e innovación digital. Análisis y comparativas honestas.',
     potentialAction: {
       '@type': 'SearchAction',
-      target: { '@type': 'EntryPoint', urlTemplate: 'https://www.techpulse.dev/es/search?q={search_term_string}' },
+      target: { '@type': 'EntryPoint', urlTemplate: 'https://www.TecnoActual.dev/es/search?q={search_term_string}' },
       'query-input': 'required name=search_term_string',
     },
     inLanguage: ['es-ES', 'en-US'],
     publisher: {
       '@type': 'Organization',
-      name: 'TechPulse',
-      url: 'https://www.techpulse.dev',
-      logo: { '@type': 'ImageObject', url: 'https://www.techpulse.dev/logo.png' },
-      sameAs: ['https://twitter.com/techpulse_dev'],
+      name: 'TecnoActual',
+      url: 'https://www.TecnoActual.dev',
+      logo: { '@type': 'ImageObject', url: 'https://www.TecnoActual.dev/logo.png' },
+      sameAs: ['https://twitter.com/TecnoActual_dev'],
     },
   };
 
@@ -126,7 +126,7 @@ export function CategoryPageSchema({ name, description, url }: { name: string; d
     '@type': 'CollectionPage',
     name,
     description,
-    url: `https://www.techpulse.dev${url}`,
+    url: `https://www.TecnoActual.dev${url}`,
   };
   return (
     <script
