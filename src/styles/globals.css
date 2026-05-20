@@ -9,10 +9,10 @@
   --font-dm-sans: 'Inter', sans-serif;
   --font-jetbrains: 'JetBrains Mono', monospace;
 
-  /* Brand colors — TecnoActual violet/indigo */
-  --color-brand: #7c3aed;
-  --color-brand-dark: #6d28d9;
-  --color-accent: #06b6d4;
+  /* Brand colors — TecnoActual blue/green (Stitch design) */
+  --color-brand: #1d4ed8;
+  --color-brand-dark: #1e40af;
+  --color-accent: #16a34a;
 
   /* Surface */
   --color-surface: #ffffff;

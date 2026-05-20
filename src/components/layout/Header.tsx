@@ -37,6 +37,7 @@ export function Header({ lang }: HeaderProps) {
     { href: `/${lang}`, label: lang === 'es' ? 'Inicio' : 'Home' },
     { href: `/${lang}/blog`, label: lang === 'es' ? 'Artículos' : 'Articles' },
     { href: `/${lang}/categoria`, label: lang === 'es' ? 'Categorías' : 'Categories' },
+    { href: `/${lang}/herramientas`, label: lang === 'es' ? 'Herramientas IA' : 'AI Tools' },
     { href: `/${lang}/about`, label: lang === 'es' ? 'Nosotros' : 'About' },
     { href: `/${lang}/contact`, label: lang === 'es' ? 'Contacto' : 'Contact' },
   ];
@@ -55,11 +56,11 @@ export function Header({ lang }: HeaderProps) {
         <div className="flex items-center justify-between h-16 lg:h-18">
           {/* Logo */}
           <Link href={`/${lang}`} className="flex items-center gap-2.5 group">
-            <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+            <div className="w-9 h-9 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
               <Cpu size={18} className="text-white" />
             </div>
             <span className="font-display text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Tecno<span className="text-violet-600 dark:text-violet-400">Actual</span>
+              Tecno<span className="text-blue-600 dark:text-blue-400">Actual</span>
             </span>
           </Link>
 

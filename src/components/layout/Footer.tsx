@@ -30,11 +30,11 @@ export function Footer({ lang }: FooterProps) {
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href={`/${lang}`} className="flex items-center gap-2.5 mb-4">
-              <div className="w-9 h-9 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-xl flex items-center justify-center">
+              <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl flex items-center justify-center">
                 <Cpu size={18} className="text-white" />
               </div>
               <span className="font-display text-xl font-bold">
-                Tecno<span className="text-violet-400">Actual</span>
+                Tecno<span className="text-blue-400">Actual</span>
               </span>
             </Link>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">

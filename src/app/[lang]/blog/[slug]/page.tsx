@@ -82,34 +82,40 @@ export default async function PostPage({ params }: { params: { lang: string; slu
         ]}
       />
 
-      {/* Hero */}
-      <div className="relative h-72 md:h-96 overflow-hidden">
+      {/* Hero — dark full-width like Stitch */}
+      <div className="relative h-[420px] md:h-[520px] overflow-hidden bg-slate-950">
         <Image
           src={post.image}
           alt={post.imageAlt[lang]}
           fill
-          className="object-cover"
+          className="object-cover opacity-40"
           priority
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/10" />
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-10 max-w-5xl mx-auto">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <Link
-              href={`/${lang}/categoria/${post.category}`}
-              className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-brand-500 text-white`}
-            >
-              {post.category}
-            </Link>
-            {post.tags.slice(0, 3).map((tag) => (
-              <span key={tag} className="px-3 py-1 bg-white/10 text-white rounded-full text-xs">
-                {tag}
-              </span>
-            ))}
+        {/* Teal/blue gradient overlay like Stitch */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/80 via-slate-900/60 to-teal-900/40" />
+        <div className="absolute inset-0 flex items-end">
+          <div className="w-full px-6 md:px-12 pb-10 max-w-5xl mx-auto">
+            <div className="flex flex-wrap items-center gap-3 mb-5">
+              <Link
+                href={`/${lang}/categoria/${post.category}`}
+                className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-green-500 hover:bg-green-400 text-white transition-colors"
+              >
+                {post.category}
+              </Link>
+              {post.tags.slice(0, 3).map((tag) => (
+                <span key={tag} className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80 rounded-full text-xs border border-white/10">
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight text-balance max-w-3xl">
+              {post.title[lang]}
+            </h1>
+            <p className="mt-4 text-white/70 text-lg max-w-2xl leading-relaxed hidden md:block">
+              {post.excerpt?.[lang]}
+            </p>
           </div>
-          <h1 className="font-display text-2xl md:text-4xl font-bold text-white leading-tight text-balance">
-            {post.title[lang]}
-          </h1>
         </div>
       </div>
 
