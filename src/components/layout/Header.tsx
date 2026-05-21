@@ -36,7 +36,7 @@ export function Header({ lang }: HeaderProps) {
   const navItems = [
     { href: `/${lang}`, label: lang === 'es' ? 'Inicio' : 'Home' },
     { href: `/${lang}/blog`, label: lang === 'es' ? 'Artículos' : 'Articles' },
-    { href: `/${lang}/categoria`, label: lang === 'es' ? 'Categorías' : 'Categories' },
+    { href: `/${lang}/reviews`, label: lang === 'es' ? 'Reviews' : 'Reviews' },
     { href: `/${lang}/herramientas`, label: lang === 'es' ? 'Herramientas IA' : 'AI Tools' },
     { href: `/${lang}/about`, label: lang === 'es' ? 'Nosotros' : 'About' },
     { href: `/${lang}/contact`, label: lang === 'es' ? 'Contacto' : 'Contact' },
