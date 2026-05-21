@@ -82,163 +82,151 @@ export default async function PostPage({ params }: { params: { lang: string; slu
         ]}
       />
 
-      {/* Hero — dark full-width like Stitch */}
-      <div className="relative h-[420px] md:h-[520px] overflow-hidden bg-slate-950">
-        <Image
-          src={post.image}
-          alt={post.imageAlt[lang]}
-          fill
-          className="object-cover opacity-40"
-          priority
-          sizes="100vw"
-        />
-        {/* Teal/blue gradient overlay like Stitch */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-950/80 via-slate-900/60 to-teal-900/40" />
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full px-6 md:px-12 pb-10 max-w-5xl mx-auto">
-            <div className="flex flex-wrap items-center gap-3 mb-5">
-              <Link
-                href={`/${lang}/categoria/${post.category}`}
-                className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-green-500 hover:bg-green-400 text-white transition-colors"
-              >
-                {post.category}
-              </Link>
-              {post.tags.slice(0, 3).map((tag) => (
-                <span key={tag} className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80 rounded-full text-xs border border-white/10">
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <h1 className="font-display text-3xl md:text-5xl font-bold text-white leading-tight text-balance max-w-3xl">
+      {/* ── Affiliate disclaimer bar (Stitch style) ── */}
+      <div className="bg-[#ecedf7] dark:bg-slate-800 py-2 text-center border-b border-slate-200 dark:border-slate-700">
+        <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 max-w-[1280px] mx-auto px-4">
+          {lang === 'es'
+            ? 'Aviso de afiliados: podemos ganar comisiones por compras realizadas a través de enlaces de esta página, sin coste adicional para ti.'
+            : 'Affiliate Disclosure: We may earn commissions from purchases made through links on this page, at no extra cost to you.'}
+        </p>
+      </div>
+
+      {/* ── Hero — full-width 614px (exact Stitch height) ── */}
+      <header className="relative w-full h-[420px] md:h-[614px] flex items-end overflow-hidden">
+        <div className="absolute inset-0 bg-slate-800">
+          <Image
+            src={post.image}
+            alt={post.imageAlt[lang]}
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/40 to-transparent" />
+        </div>
+        <div className="relative z-10 max-w-[1280px] mx-auto px-4 md:px-10 pb-10 w-full">
+          <div className="max-w-[800px]">
+            <Link
+              href={`/${lang}/categoria/${post.category}`}
+              className="inline-block bg-[#2170e4] text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4 hover:bg-[#0058be] transition-colors"
+            >
+              {post.category}
+            </Link>
+            <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight tracking-tight max-w-3xl">
               {post.title[lang]}
             </h1>
-            <p className="mt-4 text-white/70 text-lg max-w-2xl leading-relaxed hidden md:block">
-              {post.excerpt?.[lang]}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Post meta bar */}
-      <div className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-6 text-sm text-slate-600 dark:text-slate-400">
-            <Link href={`/${lang}/blog`} className="flex items-center gap-1 hover:text-brand-600 transition-colors">
-              <ArrowLeft size={16} />
-              {lang === 'es' ? 'Volver al blog' : 'Back to blog'}
-            </Link>
-            <div className="flex items-center gap-1.5">
-              <Image
-                src={post.author.avatar}
-                alt={post.author.name}
-                width={24}
-                height={24}
-                className="rounded-full"
-              />
-              <span>{post.author.name}</span>
-            </div>
-            <div className="flex items-center gap-1">
-              <Calendar size={14} />
+            <div className="flex flex-wrap items-center gap-4 text-white/80 text-sm">
+              <div className="flex items-center gap-2">
+                <Image src={post.author.avatar} alt={post.author.name} width={36} height={36} className="rounded-full border-2 border-white/30" />
+                <span>{post.author.name}</span>
+              </div>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
               <time dateTime={post.publishedAt}>{formatDate(post.publishedAt, lang)}</time>
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock size={14} />
-              <span>{post.readingTime} {lang === 'es' ? 'min de lectura' : 'min read'}</span>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              <span>⏱ {post.readingTime} {lang === 'es' ? 'min de lectura' : 'min read'}</span>
             </div>
           </div>
-          <ShareButtons url={`https://www.techpulse.dev/${lang}/blog/${post.slug}`} title={post.title[lang]} lang={lang} />
+        </div>
+      </header>
+
+      {/* ── Back + share bar ── */}
+      <div className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-3 flex flex-wrap items-center justify-between gap-4">
+          <Link href={`/${lang}/blog`} className="flex items-center gap-1 text-sm text-slate-500 hover:text-[#0058be] transition-colors">
+            <ArrowLeft size={15} /> {lang === 'es' ? 'Volver al blog' : 'Back to blog'}
+          </Link>
+          <ShareButtons url={`https://tecnoactual.vercel.app/${lang}/blog/${post.slug}`} title={post.title[lang]} lang={lang} />
         </div>
       </div>
 
-      {/* Leaderboard ad below meta */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-        <AdSlot slot="1122334455" format="leaderboard" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
-      </div>
+      {/* ── 12-col layout: TOC (3) + Article (6) + Sidebar (3) ── */}
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-16 grid grid-cols-1 lg:grid-cols-12 gap-6 relative items-start">
 
-      {/* Content + Sidebar */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="grid lg:grid-cols-[1fr_320px] gap-12">
-          {/* Article */}
-          <article>
-            {/* Lead */}
-            <div className="text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-8 p-6 border-l-4 border-brand-500 bg-brand-50 dark:bg-brand-950/20 rounded-r-xl">
-              {post.excerpt[lang]}
+        {/* Left TOC — sticky (Stitch: 3 cols) */}
+        <aside className="hidden lg:block lg:col-span-3 sticky top-24 self-start">
+          {headings.length > 0 && (
+            <div className="bg-white dark:bg-slate-800 rounded-lg p-6 border border-slate-200 dark:border-slate-700 shadow-sm">
+              <h3 className="font-bold text-slate-900 dark:text-white mb-4 text-sm">
+                {lang === 'es' ? 'Tabla de contenidos' : 'Table of Contents'}
+              </h3>
+              <TableOfContents headings={headings} />
             </div>
+          )}
+        </aside>
 
-            {/* Content */}
-            <div
-              className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-display prose-a:text-brand-600 dark:prose-a:text-brand-400 prose-img:rounded-xl prose-img:shadow-card"
-              dangerouslySetInnerHTML={{ __html: renderedContent }}
-            />
+        {/* Main article — 6 cols */}
+        <article className="lg:col-span-6 flex flex-col gap-8 max-w-[720px] mx-auto w-full">
+          {/* Lead paragraph */}
+          <p className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed border-l-4 border-[#0058be] pl-5 bg-[#f2f3fd] dark:bg-blue-950/20 py-4 pr-4 rounded-r-lg">
+            {post.excerpt[lang]}
+          </p>
 
-            {/* In-content ad */}
-            <div className="my-10">
-              <AdSlot slot="2233445566" format="rectangle" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
+          {/* Content */}
+          <div
+            className="prose prose-slate dark:prose-invert max-w-none prose-headings:font-bold prose-a:text-[#0058be] dark:prose-a:text-blue-400 prose-img:rounded-xl prose-h2:border-b prose-h2:border-slate-200 prose-h2:pb-2"
+            dangerouslySetInnerHTML={{ __html: renderedContent }}
+          />
+
+          {/* In-content ad */}
+          <div className="my-6">
+            <AdSlot slot="2233445566" format="rectangle" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
+          </div>
+
+          {/* FAQs */}
+          {post.faqs && post.faqs.length > 0 && (
+            <div className="mt-8">
+              <h2 className="font-bold text-2xl text-slate-900 dark:text-white mb-6">
+                {lang === 'es' ? 'Preguntas frecuentes' : 'Frequently asked questions'}
+              </h2>
+              <FAQAccordion faqs={post.faqs} lang={lang} />
             </div>
+          )}
 
-            {/* FAQs */}
-            {post.faqs && post.faqs.length > 0 && (
-              <div className="mt-12">
-                <h2 className="font-display text-2xl font-bold text-slate-900 dark:text-white mb-6">
-                  {lang === 'es' ? 'Preguntas frecuentes' : 'Frequently asked questions'}
-                </h2>
-                <FAQAccordion faqs={post.faqs} lang={lang} />
-              </div>
-            )}
+          {/* Tags */}
+          <div className="flex flex-wrap items-center gap-2 mt-4">
+            <Tag size={14} className="text-slate-400" />
+            {post.tags.map((tag) => (
+              <Link
+                key={tag}
+                href={`/${lang}/search?q=${encodeURIComponent(tag)}`}
+                className="px-3 py-1 text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-full hover:bg-blue-100 hover:text-[#0058be] transition-colors"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
 
-            {/* Tags */}
-            <div className="mt-10 flex flex-wrap items-center gap-2">
-              <Tag size={16} className="text-slate-400" />
-              {post.tags.map((tag) => (
-                <Link
-                  key={tag}
-                  href={`/${lang}/search?q=${encodeURIComponent(tag)}`}
-                  className="px-3 py-1 text-sm bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-full hover:bg-brand-100 hover:text-brand-700 dark:hover:bg-brand-900/30 dark:hover:text-brand-400 transition-colors"
-                >
-                  {tag}
-                </Link>
-              ))}
+          {/* Author box */}
+          <div className="p-6 bg-[#f2f3fd] dark:bg-slate-800/50 rounded-xl border border-slate-200 dark:border-slate-700 flex gap-4">
+            <Image src={post.author.avatar} alt={post.author.name} width={64} height={64} className="rounded-full flex-shrink-0" />
+            <div>
+              <div className="font-bold text-slate-900 dark:text-white mb-1">{post.author.name}</div>
+              <p className="text-sm text-slate-500 dark:text-slate-400">{post.author.bio[lang]}</p>
             </div>
+          </div>
+        </article>
 
-            {/* Author box */}
-            <div className="mt-10 p-6 bg-slate-50 dark:bg-slate-800/50 rounded-2xl border border-slate-200 dark:border-slate-700 flex gap-4">
-              <Image
-                src={post.author.avatar}
-                alt={post.author.name}
-                width={64}
-                height={64}
-                className="rounded-full flex-shrink-0"
-              />
-              <div>
-                <div className="font-display font-bold text-slate-900 dark:text-white mb-1">{post.author.name}</div>
-                <p className="text-sm text-slate-600 dark:text-slate-400">{post.author.bio[lang]}</p>
-              </div>
+        {/* Right sidebar — 3 cols */}
+        <aside className="lg:col-span-3 space-y-6 sticky top-24 self-start">
+          <AdSlot slot="3344556677" format="sidebar" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
+
+          {/* Mobile TOC */}
+          {headings.length > 0 && (
+            <div className="lg:hidden bg-white dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 p-5">
+              <h3 className="font-bold text-slate-900 dark:text-white mb-3 text-xs uppercase tracking-wider">
+                {lang === 'es' ? '📋 Contenidos' : '📋 Contents'}
+              </h3>
+              <TableOfContents headings={headings} />
             </div>
-          </article>
-
-          {/* Sticky Sidebar */}
-          <aside className="space-y-8">
-            {headings.length > 0 && (
-              <div className="bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 sticky top-24">
-                <h3 className="font-display font-bold text-slate-900 dark:text-white mb-4 text-sm uppercase tracking-wider">
-                  {lang === 'es' ? '📋 Tabla de contenidos' : '📋 Table of contents'}
-                </h3>
-                <TableOfContents headings={headings} />
-              </div>
-            )}
-
-            <div className="sticky top-80">
-              <AdSlot slot="3344556677" format="sidebar" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
-            </div>
-          </aside>
-        </div>
+          )}
+        </aside>
       </div>
 
       {/* Related articles */}
       {related.length > 0 && (
-        <section className="bg-slate-50 dark:bg-slate-900/50 py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="font-display text-display-xs font-bold text-slate-900 dark:text-white mb-8">
+        <section className="bg-[#f2f3fd] dark:bg-slate-900/50 py-16 border-t border-slate-200 dark:border-slate-800">
+          <div className="max-w-[1280px] mx-auto px-4 md:px-10">
+            <h2 className="font-bold text-2xl text-slate-900 dark:text-white mb-8">
               {lang === 'es' ? 'Artículos relacionados' : 'Related articles'}
             </h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -251,7 +239,7 @@ export default async function PostPage({ params }: { params: { lang: string; slu
       )}
 
       {/* Footer ad */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-10 py-10">
         <AdSlot slot="4455667788" format="leaderboard" label={lang === 'es' ? 'Publicidad' : 'Advertisement'} />
       </div>
     </>
