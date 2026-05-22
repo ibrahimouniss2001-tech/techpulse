@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react'
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8000'
-const CATEGORIAS = ['IA', 'Móviles', 'Ordenadores', 'Software', 'Gadgets']
+const CATEGORIAS = ['AI', 'Smartphones', 'Laptops', 'Software', 'Gadgets']
 
 type Tab = 'archivo' | 'tema'
 
@@ -79,8 +79,11 @@ export default function AdminPage() {
 
   return (
     <main style={{ maxWidth: 620, margin: '48px auto', padding: '0 24px', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-      <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>TecnoActual Admin</h1>
-      <p style={{ fontSize: 14, color: '#666', marginBottom: 32 }}>Genera artículos SEO automáticamente con IA.</p>
+      <h1 style={{ fontSize: 26, fontWeight: 700, marginBottom: 8 }}>TechPulse Admin</h1>
+      <p style={{ fontSize: 14, color: '#666', marginBottom: 8 }}>Generate SEO articles automatically with AI.</p>
+      <div style={{ fontSize: 12, color: '#888', marginBottom: 24, padding: '8px 12px', background: '#f5f5f5', borderRadius: 6, fontFamily: 'monospace' }}>
+        Backend: {API_BASE}
+      </div>
 
       {/* API Key */}
       <section style={{ marginBottom: 28, padding: '16px 20px', background: '#f8f8f8', borderRadius: 10, border: '1px solid #eee' }}>
@@ -207,7 +210,7 @@ export default function AdminPage() {
           {slugs.map(slug => (
             <a
               key={slug}
-              href={`/es/blog/${slug}`}
+              href={`/en/blog/${slug}`}
               target="_blank"
               rel="noreferrer"
               style={{
