@@ -8,6 +8,7 @@ import { fetchApiPosts } from '@/lib/api';
 import { PostCard } from '@/components/blog/PostCard';
 import { AdSlot } from '@/components/ads/AdSlot';
 import { BreadcrumbSchema, WebSiteSchema } from '@/components/seo/Schemas';
+import { NewsletterInline } from '@/components/ui/NewsletterInline';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const isEs = params.lang === 'es';
@@ -375,20 +376,7 @@ export default async function HomePage({ params }: { params: { lang: string } })
             <p className="text-white/80 text-base mb-6">
               {isEs ? 'Únete a más de 10.000 personas que dominan la IA.' : 'Join 10,000+ people mastering AI.'}
             </p>
-            <form className="flex flex-col md:flex-row gap-3 max-w-[500px] mx-auto" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                required
-                placeholder={isEs ? 'Tu correo electrónico' : 'Your email address'}
-                className="flex-1 bg-white/10 border-none text-white rounded px-4 py-3 focus:ring-2 focus:ring-blue-300 placeholder:text-white/50 text-sm outline-none"
-              />
-              <button
-                type="submit"
-                className="bg-blue-200 text-blue-900 px-6 py-3 rounded font-bold text-xs uppercase tracking-widest hover:bg-blue-100 transition-colors shadow-sm whitespace-nowrap"
-              >
-                {isEs ? 'Suscribirse' : 'Subscribe'}
-              </button>
-            </form>
+            <NewsletterInline lang={lang} />
           </div>
         </div>
       </section>
